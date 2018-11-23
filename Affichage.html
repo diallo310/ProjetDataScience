@@ -148,8 +148,17 @@ var data_length = data.length;
       .attr("dy", ".71em")
       .style("text-anchor", "end")
       .text("Nombre de crime");
+     
+   svg.append("text") 
+	.attr("x", (width / 2)) 
+	.attr("y", 20 - (margin.top)) 
+	.attr("text-anchor", "middle") 
+	.style("font-size", "22px") 
+	.style("text-decoration", "underline") 
+	.attr("fill","green")
+	.text("L'évolution du nombre de crimes entre 2010 et 2015 dans la ville de los Angeles");
 
-  svg.selectAll(".bar")
+   svg.selectAll(".bar")
       .data(dt)
     .enter().append("rect")
       .attr("class", "bar")
@@ -159,7 +168,6 @@ var data_length = data.length;
       .attr("height", function(d) { return height - y(d.valeur); })
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
-
 });
 
 function type(d) {
