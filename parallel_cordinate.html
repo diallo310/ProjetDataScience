@@ -1,6 +1,18 @@
   <!DOCTYPE html>
   <meta charset="utf-8">
   <style>
+  #parallel{
+    float:right;
+    height: 900px;
+    width: 1000px;
+    margin: 0 auto;
+
+  }
+  #svg{
+     display: inline-block;
+     padding: 50px
+   
+  }
 
   svg {
     font: 10px sans-serif;
@@ -94,6 +106,7 @@
         </ul>
         <div>
       </div>
+
     </div>
     <div class="main-panel">
       <!-- Navbar -->
@@ -115,14 +128,14 @@
           </button>
           
       </nav>
-
-  
-
+    </div>
+  </div>
+   <div id="parallel" ></div> 
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script>
       
-    var margin = {top: 30, right: 10, bottom: 10, left: 10},
-    width = 1000 - margin.left - margin.right,
+    var margin = {top: 50, right: 10, bottom: 10, left: 0},
+    width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
     var x = d3.scale.ordinal().rangePoints([0, width], 1),
@@ -134,7 +147,7 @@
     background,
     foreground;
 
-    var svg = d3.select(".wrapper").append("svg")
+    var svg = d3.select("#parallel").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .attr("id","#svg")
@@ -271,7 +284,5 @@
       }) ? null : "none";
     });
   }
-
-
 
   </script>
