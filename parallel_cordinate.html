@@ -39,7 +39,85 @@
   }
 
   </style>
-  <body>
+   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+   Dashboard D3
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- CSS Files -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/now-ui-dashboard.css?v=1.2.0" rel="stylesheet" />
+  
+  <body class="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="orange">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+      <div class="logo">
+          Dashboard Los Angeles Crimes
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="active ">
+            <a href="./dashboard.html">
+              <i class="now-ui-icons design_app"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li>
+            <a href="./map.html">
+              <i class="now-ui-icons location_map-big"></i>
+              <p>Map</p>
+            </a>
+          </li>
+          <li>
+            <a href="./graph.html">
+              <i class="now-ui-icons ui-1_bell-53"></i>
+              <p>Graph </p>
+            </a>
+          </li>
+          <li>
+            <a href="./parallel_cordinate.html">
+              <i class="now-ui-icons users_single-02"></i>
+              <p>Parallel Cordinate</p>
+            </a>
+          </li>
+         
+         
+         
+        </ul>
+        <div>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg fixed-top navbar-transparent  bg-primary  navbar-absolute">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
+            </div>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+          
+      </nav>
+
+  
+
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script>
       
@@ -52,16 +130,17 @@
     dragging = {};
 
     var line = d3.svg.line(),
-    axis = d3.svg.axis().orient("left"),
+    axis = d3.svg.axis().orient("right"),
     background,
     foreground;
 
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select(".wrapper").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+    .attr("id","#svg")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+   
 
     d3.csv("data.csv", function(error, data) {
 
@@ -73,8 +152,6 @@
   for(var i=0 ; i< rowVals.length;i++)
   {
     var myVar = rowVals[i];
-    console.log(rowVals.length);
-    console.log("i= "+i+" " +rowVals);
 
     headerNames.push( !isNaN(myVar))
   }
@@ -83,9 +160,6 @@
  
     //on extrait la liste des dimensions et on crée une échelle pour chacune.
     x.domain(dimensions = d3.keys(data[0]).filter(function( d,i) {
-      console.log("=========d====="+d)
-      //console.log("=========i======"+i)
-      console.log(headerNames[i]);
     
       return ( headerNames[i] ) && (y[d] = d3.scale.linear()
         .domain(d3.extent(data, function(p) { return +p[d]; }))
